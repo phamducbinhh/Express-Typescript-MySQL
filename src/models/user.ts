@@ -8,7 +8,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      // define association here
+      // Định nghĩa mối quan hệ giữa User và Role
+      User.belongsTo(models.Role, {
+        // Khóa ngoại trong bảng User tham chiếu đến bảng Role
+        foreignKey: 'role_code', // Cột role_code trong bảng User
+        targetKey: 'code', // Cột code trong bảng Role sẽ được tham chiếu
+        as: 'role' // Tên alias cho mối quan hệ này
+      })
     }
   }
   User.init(

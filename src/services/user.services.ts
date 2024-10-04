@@ -7,10 +7,16 @@ class UserService {
     try {
       const response = await db.User.findOne({
         where: { id },
-        raw: true,
         attributes: {
-          exclude: ['password']
-        }
+          exclude: ['password', 'createdAt', 'updatedAt', 'role_code']
+        },
+        include: [
+          {
+            model: db.Role,
+            as: 'role',
+            attributes: ['id', 'code', 'value']
+          }
+        ]
       })
 
       return {
