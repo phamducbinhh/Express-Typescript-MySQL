@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const db = require('../models')
-// const { generateToken } = require('../config/generateToken')
-const jwt = require('jsonwebtoken')
+const generateToken = require('../config/generateToken')
 
 class AuthService {
   constructor() {}
@@ -28,13 +27,11 @@ class AuthService {
         throw new Error('Email đã tồn tại trong hệ thống')
       }
 
-      const token = jwt.sign(
-        { id: user.id, email: user.email, role_code: user.role_code },
-        process.env.JWT_EXPIRES_IN,
-        {
-          expiresIn: '2d'
-        }
-      )
+      const token = generateToken({
+        id: user.id,
+        email: user.email,
+        role_code: user.role_code
+      })
 
       return {
         err: 0,
@@ -60,13 +57,11 @@ class AuthService {
       if (!isPasswordValid) {
         throw new Error('Mật khẩu không chính xác')
       }
-      const token = jwt.sign(
-        { id: user.id, email: user.email, role_code: user.role_code },
-        process.env.JWT_EXPIRES_IN,
-        {
-          expiresIn: '2d'
-        }
-      )
+      const token = generateToken({
+        id: user.id,
+        email: user.email,
+        role_code: user.role_code
+      })
 
       return {
         err: 0,
