@@ -6,7 +6,7 @@ class BookController {
 
   async getBooks(req: any, res: any) {
     try {
-      const response = await bookService.getBooksSerivce()
+      const response = await bookService.getBooksSerivce(req)
 
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
