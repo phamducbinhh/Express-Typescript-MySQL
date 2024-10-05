@@ -6,12 +6,21 @@ class BookService {
   async getBooksSerivce() {
     try {
       const response = await db.Book.findAll({
-        raw: true
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'categoryId']
+        },
+        include: [
+          {
+            model: db.Category,
+            as: 'category',
+            attributes: ['id', 'title', 'description']
+          }
+        ]
       })
 
       return {
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to get categories.',
+        msg: response ? 'OK' : 'Failed to get books.',
         response
       }
     } catch (error: any) {
