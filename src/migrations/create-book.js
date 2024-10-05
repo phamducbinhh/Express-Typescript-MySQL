@@ -23,8 +23,14 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      category_code: {
-        type: Sequelize.STRING
+      categoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Categories',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,

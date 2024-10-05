@@ -8,13 +8,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      // define association here
+      // Một Category có thể có nhiều Book
+      Category.hasMany(models.Book, { foreignKey: 'categoryId', as: 'books' })
     }
   }
   Category.init(
     {
-      code: DataTypes.STRING,
-      value: DataTypes.STRING
+      title: DataTypes.STRING,
+      description: DataTypes.TEXT
     },
     {
       sequelize,
