@@ -44,6 +44,27 @@ class BookService {
       throw new Error(error.message)
     }
   }
+
+  async createBookSerivce(body: any) {
+    try {
+      const [book, created] = await db.Book.findOrCreate({
+        where: { title: body.title },
+        defaults: body
+      })
+
+      if (!created) {
+        throw new Error('Book already exists.')
+      }
+
+      return {
+        err: 0,
+        msg: 'Book created successfully.',
+        book: book
+      }
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
 }
 
 module.exports = new BookService()
