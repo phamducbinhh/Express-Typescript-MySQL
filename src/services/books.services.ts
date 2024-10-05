@@ -7,8 +7,14 @@ class BookService {
     const page = parseInt(req.query.page || 1)
     const limit = parseInt(req.query.limit || 5)
     const offset = (page - 1) * limit
+    const search = req.query.search || ''
     try {
       const { rows, count } = await db.Book.findAndCountAll({
+        where: {
+          title: {
+            [db.Sequelize.Op.like]: `%${search}%`
+          }
+        },
         attributes: {
           exclude: ['createdAt', 'updatedAt', 'categoryId']
         },
