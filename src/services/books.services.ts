@@ -65,6 +65,7 @@ class BookService {
       throw new Error(error.message)
     }
   }
+
   async deleteBookSerivce(id: number) {
     try {
       const response = await db.Book.destroy({
@@ -79,6 +80,7 @@ class BookService {
       throw new Error(error.message)
     }
   }
+
   async updateBookService(id: number, body: any) {
     try {
       const response = await db.Book.findOne({
