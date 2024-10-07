@@ -1,6 +1,7 @@
 const express = require('express')
 
 const verifyToken = require('../middleware/verifyToken')
+
 const verifyRole = require('../middleware/verifyRole')
 
 const { userController } = require('../controllers')
