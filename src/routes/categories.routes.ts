@@ -10,4 +10,6 @@ const router = express.Router()
 
 router.get('/', [verifyToken, verifyRole(['R1'])], categoryController.getCategories)
 
+router.get('/:id', [verifyToken, verifyRole(['R1'])], categoryController.getCategoryDetail)
+
 module.exports = router
