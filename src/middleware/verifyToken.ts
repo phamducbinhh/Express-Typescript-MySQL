@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken')
 const HttpStatusCode = require('../constants/HttpStatusCode')
 
 const verifyToken = async (req: any, res: any, next: any) => {
-  const token = req.headers?.authorization?.split(' ')[1]
+  const token = req.cookies?.token ? req.cookies?.token : req.headers?.authorization?.split(' ')[1]
+
   if (!token) {
     return res.status(HttpStatusCode.UNAUTHORIZED).json({
       err: 1,

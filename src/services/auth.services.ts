@@ -42,7 +42,7 @@ class AuthService {
       throw new Error(error.message)
     }
   }
-  async login({ email, password }: { email: string; password: string }) {
+  async login({ email, password }: { email: string; password: string }, res: any) {
     try {
       const user = await db.User.findOne({
         where: { email }
@@ -61,6 +61,13 @@ class AuthService {
         id: user.id,
         email: user.email,
         role_code: user.role_code
+      })
+
+      // Lưu token vào cookie
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 2 * 24 * 60 * 60 * 1000
       })
 
       return {
