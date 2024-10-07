@@ -79,6 +79,31 @@ class BookService {
       throw new Error(error.message)
     }
   }
+  async updateBookService(id: number, body: any) {
+    try {
+      const response = await db.Book.findOne({
+        where: { id: id }
+      })
+
+      if (!response) {
+        return {
+          err: 1,
+          msg: 'Book not found.'
+        }
+      }
+
+      await db.Book.update(body, {
+        where: { id: id }
+      })
+
+      return {
+        err: 0,
+        msg: 'Book updated successfully.'
+      }
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
 }
 
 module.exports = new BookService()
