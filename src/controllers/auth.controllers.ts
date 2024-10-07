@@ -16,8 +16,8 @@ class AuthController {
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-        err: -1,
-        msg: error.message
+        success: false,
+        message: error.message
       })
     }
   }
@@ -33,8 +33,8 @@ class AuthController {
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-        err: -1,
-        msg: error.message
+        success: false,
+        message: error.message
       })
     }
   }
@@ -43,13 +43,13 @@ class AuthController {
     try {
       res.clearCookie('token')
       return res.status(HttpStatusCode.SUCCESS).json({
-        err: 0,
-        msg: 'Logout successfully'
+        success: true,
+        message: 'Logout successfully'
       })
     } catch (error: any) {
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-        err: -1,
-        msg: error.message
+        success: false,
+        message: error.message
       })
     }
   }

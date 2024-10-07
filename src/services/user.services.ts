@@ -20,8 +20,8 @@ class UserService {
       })
 
       return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Người dùng không tìm thấy',
+        success: response ? true : false,
+        message: response ? 'OK' : 'Người dùng không tìm thấy',
         response
       }
     } catch (error: any) {

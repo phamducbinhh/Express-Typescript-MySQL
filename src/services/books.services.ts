@@ -30,8 +30,8 @@ class BookService {
       })
 
       return {
-        err: rows ? 0 : 1,
-        msg: rows ? 'OK' : 'Failed to get books.',
+        success: rows ? true : false,
+        message: rows ? 'Get books successfully' : 'Failed to get books.',
         metadata: {
           totalItems: count,
           itemsPerPage: limit,
@@ -57,8 +57,8 @@ class BookService {
       }
 
       return {
-        err: 0,
-        msg: 'Book created successfully.',
+        success: true,
+        message: 'Book created successfully.',
         book: book
       }
     } catch (error: any) {
@@ -73,8 +73,8 @@ class BookService {
       })
 
       return {
-        err: response ? 0 : 1,
-        msg: response ? 'Book deleted successfully.' : 'Book not found.'
+        success: response ? true : false,
+        message: response ? 'Book deleted successfully.' : 'Book not found.'
       }
     } catch (error: any) {
       throw new Error(error.message)
@@ -89,8 +89,8 @@ class BookService {
 
       if (!response) {
         return {
-          err: 1,
-          msg: 'Book not found.'
+          success: false,
+          message: 'Book not found.'
         }
       }
 
@@ -99,8 +99,8 @@ class BookService {
       })
 
       return {
-        err: 0,
-        msg: 'Book updated successfully.'
+        success: true,
+        message: 'Book updated successfully.'
       }
     } catch (error: any) {
       throw new Error(error.message)

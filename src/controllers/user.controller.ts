@@ -12,8 +12,8 @@ class UserController {
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-        err: -1,
-        msg: error.message
+        success: false,
+        message: error.message
       })
     }
   }

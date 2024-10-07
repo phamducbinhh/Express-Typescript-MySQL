@@ -41,8 +41,8 @@ class AuthService {
       })
 
       return {
-        err: 0,
-        mes: 'Đăng ký thành công',
+        success: true,
+        message: 'Đăng ký thành công',
         token: token || null
       }
     } catch (error: any) {
@@ -78,8 +78,8 @@ class AuthService {
       })
 
       return {
-        err: 0,
-        mes: 'Đăng nhập thành công',
+        success: true,
+        message: 'Đăng nhập thành công',
         token: token || null
       }
     } catch (error: any) {

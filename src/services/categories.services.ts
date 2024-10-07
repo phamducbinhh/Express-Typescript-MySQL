@@ -10,8 +10,8 @@ class CategoryService {
       })
 
       return {
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to get categories.',
+        success: response ? true : false,
+        message: response ? 'OK' : 'Failed to get categories.',
         response
       }
     } catch (error: any) {
@@ -34,14 +34,14 @@ class CategoryService {
 
       if (!response) {
         return {
-          err: 1,
-          msg: 'Category not found.'
+          success: false,
+          message: 'Category not found.'
         }
       }
 
       return {
-        err: 0,
-        msg: 'OK',
+        success: true,
+        message: 'OK',
         response
       }
     } catch (error: any) {

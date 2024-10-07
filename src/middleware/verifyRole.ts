@@ -6,15 +6,15 @@ const verifyRole = (code: string[]) => {
 
     if (!userRole) {
       return res.status(HttpStatusCode.FORBIDEN).json({
-        err: 1,
-        msg: 'Access denied, no role provided'
+        success: false,
+        message: 'Access denied, no role provided'
       })
     }
 
     if (!code.includes(userRole)) {
       return res.status(HttpStatusCode.FORBIDEN).json({
-        err: 1,
-        msg: 'Access denied, insufficient permissions'
+        success: false,
+        message: 'Access denied, insufficient permissions'
       })
     }
 

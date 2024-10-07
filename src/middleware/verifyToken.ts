@@ -6,16 +6,16 @@ const verifyToken = async (req: any, res: any, next: any) => {
 
   if (!token) {
     return res.status(HttpStatusCode.UNAUTHORIZED).json({
-      err: 1,
-      msg: 'Missing access token'
+      success: false,
+      message: 'Missing access token'
     })
   }
   try {
     jwt.verify(token, process.env.JWT_EXPIRES_IN, (err: any, decoded: any) => {
       if (err) {
         return res.status(HttpStatusCode.UNAUTHORIZED).json({
-          err: 1,
-          msg: 'Access token expired'
+          success: false,
+          message: 'Access token expired'
         })
       }
       req.user = decoded
