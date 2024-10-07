@@ -38,6 +38,21 @@ class AuthController {
       })
     }
   }
+
+  async logout(req: any, res: any) {
+    try {
+      res.clearCookie('token')
+      return res.status(HttpStatusCode.SUCCESS).json({
+        err: 0,
+        msg: 'Logout successfully'
+      })
+    } catch (error: any) {
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+        err: -1,
+        msg: error.message
+      })
+    }
+  }
 }
 
 module.exports = new AuthController()
