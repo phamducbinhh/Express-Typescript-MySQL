@@ -13,7 +13,7 @@ class AuthService {
     return bcrypt.compareSync(password, hashedPassword)
   }
 
-  async register({ email, password }: { email: string; password: string }) {
+  async register({ email, password }: { email: string; password: string }, res: any) {
     try {
       const [user, created] = await db.User.findOrCreate({
         where: { email },
@@ -31,6 +31,13 @@ class AuthService {
         id: user.id,
         email: user.email,
         role_code: user.role_code
+      })
+
+      // Lưu token vào cookie
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 2 * 24 * 60 * 60 * 1000
       })
 
       return {
