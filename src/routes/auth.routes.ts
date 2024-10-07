@@ -10,6 +10,8 @@ const router = express.Router()
 
 router.post('/register', validateRegister, authController.register)
 
+router.post('/login/google', authController.loginWithGoogle)
+
 router.post('/login', validateLogin, authController.login)
 
 router.post('/logout', verifyToken, authController.logout)
