@@ -65,6 +65,20 @@ class BookService {
       throw new Error(error.message)
     }
   }
+  async deleteBookSerivce(id: number) {
+    try {
+      const response = await db.Book.destroy({
+        where: { id: id }
+      })
+
+      return {
+        err: response ? 0 : 1,
+        msg: response ? 'Book deleted successfully.' : 'Book not found.'
+      }
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
 }
 
 module.exports = new BookService()

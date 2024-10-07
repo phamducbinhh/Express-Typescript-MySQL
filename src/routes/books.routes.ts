@@ -12,6 +12,8 @@ const router = express.Router()
 
 router.get('/', [verifyToken, verifyRole(['R1'])], bookController.getBooks)
 
+router.delete('/:id', [verifyToken, verifyRole(['R1'])], bookController.deleteBook)
+
 router.post('/', [verifyToken, verifyRole(['R1'])], validateCreateBook, bookController.createBook)
 
 module.exports = router
