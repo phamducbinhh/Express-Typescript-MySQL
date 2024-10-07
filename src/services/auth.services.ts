@@ -25,7 +25,11 @@ class AuthService {
       })
 
       if (!created) {
-        throw new Error('Email đã tồn tại trong hệ thống')
+        return {
+          success: false,
+          message: 'Email không tồn tại trong hệ thống',
+          token: null
+        }
       }
 
       const token = generateToken({
@@ -58,13 +62,27 @@ class AuthService {
       })
 
       if (!user) {
-        throw new Error('Email không tồn tại trong hệ thống')
+        return {
+          success: false,
+          message: 'Email không tồn tại trong hệ thống'
+        }
+      }
+
+      if (!user.password) {
+        return {
+          success: false,
+          message: 'Người dùng đã đăng ký bằng Google/Facebook. Vui lòng đăng nhập bằng Google/Facebook.'
+        }
       }
 
       const isPasswordValid = this.comparePassword(password, user.password)
 
       if (!isPasswordValid) {
-        throw new Error('Mật khẩu không chính xác')
+        return {
+          success: false,
+          message: 'Mật khẩu không chính xác',
+          token: null
+        }
       }
       const token = generateToken({
         id: user.id,
