@@ -37,7 +37,7 @@ class UserController {
   async updateCurrent(req: any, res: any) {
     const { id } = req.user
     try {
-      const response = await userService.updateCurrentUser(id)
+      const response = await userService.updateCurrentUser(id, req.body)
 
       if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 

@@ -44,11 +44,17 @@ class UserService {
       throw new Error(error.message)
     }
   }
-  async updateCurrentUser(id: string) {
+  async updateCurrentUser(id: string, body: any) {
+    const { name, avatar } = body
     try {
       const user = await db.User.findOne({
         where: { id }
       })
+
+      user.name = name || user.name
+      user.avatar = avatar || user.avatar
+
+      await user.save()
 
       return {
         success: user ? true : false,
