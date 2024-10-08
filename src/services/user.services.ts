@@ -37,8 +37,23 @@ class UserService {
 
       return {
         success: response ? true : false,
-        message: response ? 'OK' : 'Lấy thông tin người dùng thành công',
+        message: response ? 'OK' : 'người dùng không tồn tại',
         data: response
+      }
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
+  async updateCurrentUser(id: string) {
+    try {
+      const user = await db.User.findOne({
+        where: { id }
+      })
+
+      return {
+        success: user ? true : false,
+        message: user ? 'OK' : 'người dùng không tồn tại',
+        data: user
       }
     } catch (error: any) {
       throw new Error(error.message)

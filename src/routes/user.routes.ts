@@ -10,6 +10,8 @@ const router = express.Router()
 
 router.get('/me', [verifyToken], userController.getCurrent)
 
+router.put('/me', [verifyToken], userController.updateCurrent)
+
 router.get('/:id', [verifyToken, verifyRole(['R1'])], userController.getUserById)
 
 module.exports = router

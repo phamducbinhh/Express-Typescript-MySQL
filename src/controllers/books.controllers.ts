@@ -8,6 +8,7 @@ class BookController {
   async getBooks(req: any, res: any) {
     try {
       const response = await bookService.getBooksSerivce(req)
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
@@ -25,6 +26,7 @@ class BookController {
     }
     try {
       const response = await bookService.createBookSerivce(req.body)
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 
       return res.status(HttpStatusCode.CREATED).json(response)
     } catch (error: any) {
@@ -37,6 +39,7 @@ class BookController {
   async deleteBook(req: any, res: any) {
     try {
       const response = await bookService.deleteBookSerivce(req.params.id)
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
@@ -53,6 +56,7 @@ class BookController {
     }
     try {
       const response = await bookService.updateBookService(req.params.id, req.body)
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {

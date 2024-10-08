@@ -12,6 +12,7 @@ class AuthController {
     }
     try {
       const response = await authService.register(req.body, res)
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
@@ -29,6 +30,7 @@ class AuthController {
     }
     try {
       const response = await authService.login(req.body, res)
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
@@ -56,6 +58,7 @@ class AuthController {
   async loginWithGoogle(req: any, res: any) {
     try {
       const response = await authService.loginGoogleService(req.body?.token, res)
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {

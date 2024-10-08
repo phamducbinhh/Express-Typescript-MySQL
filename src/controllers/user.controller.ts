@@ -9,6 +9,8 @@ class UserController {
     try {
       const response = await userService.getUserById({ id })
 
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
+
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
@@ -18,10 +20,26 @@ class UserController {
     }
   }
   async getCurrent(req: any, res: any) {
-    console.log('req', req)
     const { id } = req.user
     try {
       const response = await userService.getCurrentUser(id)
+
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
+
+      return res.status(HttpStatusCode.SUCCESS).json(response)
+    } catch (error: any) {
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: error.message
+      })
+    }
+  }
+  async updateCurrent(req: any, res: any) {
+    const { id } = req.user
+    try {
+      const response = await userService.updateCurrentUser(id)
+
+      if (response.success === false) return res.status(HttpStatusCode.NOT_FOUND).json(response)
 
       return res.status(HttpStatusCode.SUCCESS).json(response)
     } catch (error: any) {
